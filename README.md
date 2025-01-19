@@ -47,3 +47,47 @@ export JWT_SECRET=<clave_secreta>
 ./mvnw spring-boot:run
 mvn spring-boot:run
 
+Endpoints
+Usuarios
+Método	Endpoint	Descripción	Autenticación
+POST	/usuarios	Registrar un nuevo usuario	No
+GET	/usuarios/{id}	Obtener información de un usuario	Sí
+Tópicos
+Método	Endpoint	Descripción	Autenticación
+GET	/topicos	Listar todos los tópicos	No
+POST	/topicos	Crear un nuevo tópico	Sí
+DELETE	/topicos/{id}	Eliminar un tópico por su ID	Sí
+Respuestas
+Método	Endpoint	Descripción	Autenticación
+POST	/respuestas	Crear una respuesta	Sí
+GET	/respuestas/topico/{topicoId}	Listar respuestas de un tópico específico	No
+Estructura del Proyecto
+bash
+Copiar
+Editar
+src/
+├── main/
+│   ├── java/com/foro/hub/
+│   │   ├── controller/       # Controladores REST
+│   │   ├── service/          # Lógica de negocio
+│   │   ├── repository/       # Acceso a la base de datos
+│   │   └── model/            # Entidades y modelos
+│   └── resources/
+│       ├── application.properties  # Configuración
+Pruebas
+Prueba en Insomnia/Postman
+
+Importa los endpoints disponibles en el README.
+Configura el token JWT en las solicitudes protegidas.
+Prueba automatizada
+
+Ejecuta los tests:
+bash
+Copiar
+Editar
+./mvnw test
+Tecnologías utilizadas
+Spring Boot 3: Para construir la API REST.
+PostgreSQL: Como base de datos relacional.
+JWT: Para autenticación y autorización.
+Maven: Gestión de dependencias y compilación.
