@@ -1,0 +1,38 @@
+package com.foro.controller;
+
+import com.foro.model.Topico;
+import com.foro.repository.TopicoRepository;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.web.servlet.MockMvc;
+
+import java.util.Arrays;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+@WebMvcTest(TopicoController.class)
+public class TopicoControllerTest {
+
+    @Autowired
+    private MockMvc mockMvc;
+
+    @MockBean
+    private TopicoRepository topicoRepository;
+
+    @Test
+    public void testListarTopicos() throws Exception {
+        Topico topico = new Topico();
+        topico.setTitulo("Prueba");
+        topico.setMensaje("Esto es una prueba");
+
+        Mockito.when(topicoRepository.findAll()).thenReturn(Arrays.asList(topico));
+
+        mockMvc.perform(get("/topicos"))
+               .andExpect(status().isOk())
+               .andExpect(jsonPath("$[0].titulo").value("Prueba"));
+    }
+}
