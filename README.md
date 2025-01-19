@@ -32,6 +32,56 @@ Foro Hub es una API REST diseñada para gestionar un foro de discusión. Los usu
 
 ---
 
+# Configura las variables de entorno
+
+export DATABASE_URL=jdbc:postgresql://<host>:<puerto>/<nombre_db>
+export DATABASE_USERNAME=<tu_usuario>
+export DATABASE_PASSWORD=<tu_contraseña>
+export JWT_SECRET=<clave_secreta>
+
+# Ejecuta la aplicación
+
+Con Maven Wrapper:
+./mvnw spring-boot:run
+
+O con Maven instalado:
+mvn spring-boot:run
+
+---
+
+# Endpoints
+
+Usuarios
+Método	Endpoint	Descripción	Autenticación
+POST	/usuarios	Registrar un nuevo usuario	No
+GET	/usuarios/{id}	Obtener información de un usuario	Sí
+Tópicos
+Método	Endpoint	Descripción	Autenticación
+GET	/topicos	Listar todos los tópicos	No
+POST	/topicos	Crear un nuevo tópico	Sí
+DELETE	/topicos/{id}	Eliminar un tópico por su ID	Sí
+Respuestas
+Método	Endpoint	Descripción	Autenticación
+POST	/respuestas	Crear una respuesta	Sí
+GET	/respuestas/topico/{topicoId}	Listar respuestas de un tópico específico	No
+
+---
+
+# Estructura del Proyecto
+
+src/
+├── main/
+│   ├── java/com/foro/hub/
+│   │   ├── controller/       # Controladores REST
+│   │   ├── service/          # Lógica de negocio
+│   │   ├── repository/       # Acceso a la base de datos
+│   │   └── model/            # Entidades y modelos
+│   └── resources/
+│       ├── application.properties  # Configuración
+
+
+---
+
 ## **Instalación y configuración**
 
 ### **1. Clona este repositorio**
